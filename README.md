@@ -51,42 +51,19 @@ docker network create crud-net
 Start MongoDB with required environment variables:
 
 ```bash
-docker run -d \
-  --name mongo \
-  --network crud-net \
-  -e MONGO_INITDB_ROOT_USERNAME=admin \
-  -e MONGO_INITDB_ROOT_PASSWORD=secret \
-  -e MONGO_INITDB_DATABASE=crudapp \
-  -p 27017:27017 \
-  mongo:6
+docker run -d --name mongo --network crud-net -e MONGO_INITDB_ROOT_USERNAME=admin -e MONGO_INITDB_ROOT_PASSWORD=secret -e MONGO_INITDB_DATABASE=crudapp -p 27017:27017 mongo:6
 ```
 
 ### Step 5: Run Backend Container
 Start the backend service and link it to MongoDB:
 ```bash
-docker run -d \
-  --name backend \
-  --network crud-net \
-  -e BACKEND_PORT=8000 \
-  -e DB_HOST=mongo \
-  -e DB_PORT=27017 \
-  -e DB_NAME=crudapp \
-  -e DB_USER=admin \
-  -e DB_PASS=secret \
-  -p 8000:8000 \
-  dnptestaccount/crud-python-backend
+docker run -d --name backend --network crud-net -e BACKEND_PORT=8000 -e DB_HOST=mongo -e DB_PORT=27017 -e DB_NAME=crudapp -e DB_USER=admin -e DB_PASS=secret -p 8000:8000 dnptestaccount/crud-python-backend
 ```
 
 ### Step 6: Run Frontend Container
 Replace <EC2_PUBLIC_IP> with your actual server IP or domain:
 ```bash
-docker run -d \
-  --name frontend \
-  --network crud-net \
-  -e FRONTEND_PORT=3000 \
-  -e API_BASE_URL=http://<EC2_PUBLIC_IP>:8000 \
-  -p 3000:3000 \
-  dnptestaccount/crud-nodejs-frontend
+docker run -d --name frontend --network crud-net -e FRONTEND_PORT=3000 -e API_BASE_URL=http://<EC2_PUBLIC_IP>:8000 -p 3000:3000 dnptestaccount/crud-nodejs-frontend
 ```
 ### Access the Application
 Frontend (React):
