@@ -32,4 +32,12 @@ Follow the steps below to run the application using Docker.
 docker pull dnptestaccount/crud-nodejs-frontend
 docker pull dnptestaccount/crud-python-backend
 docker pull mongo:6
+```
+
+### Step 2: (Optional) Build Images Locally
+If you have the source code and Dockerfiles, you can build the images using:
+```bash
+docker build -t crud-backend ./backend
+docker build -t crud-frontend ./frontend
+```
 
